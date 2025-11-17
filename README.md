@@ -1,7 +1,7 @@
 # Spring Boot Starter Toon
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Maven Central](https://img.shields.io/maven-central/v/com.giovannicaggianella/spring-boot-starter-toon.svg)](https://search.maven.org/search?q=g:com.giovannicaggianella%20AND%20a:spring-boot-starter-toon)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.giovannicaggianella/spring-boot-starter-toon.svg)](https://search.maven.org/search?q=g:io.github.giovannicaggianella%20AND%20a:spring-boot-starter-toon)
 
 Spring Boot Starter for TOON format serialization/deserialization using JToon.
 
@@ -18,7 +18,7 @@ Add the following dependency to your Maven project:
 
 ```xml
 <dependency>
-    <groupId>com.giovannicaggianella</groupId>
+    <groupId>io.github.giovannicaggianella</groupId>
     <artifactId>spring-boot-starter-toon</artifactId>
     <version>0.1.0</version>
 </dependency>
@@ -29,7 +29,7 @@ Add the following dependency to your Maven project:
 ### 1. Annotate your class with `@ToonEntity`
 
 ```java
-import com.giovannicaggianella.toon.annotation.ToonEntity;
+import io.github.giovannicaggianella.toon.annotation.ToonEntity;
 
 @ToonEntity
 public class User {
@@ -43,7 +43,7 @@ public class User {
 ### 2. Use `ToonAnnotationProcessor` for serialization/deserialization
 
 ```java
-import com.giovannicaggianella.toon.processor.ToonAnnotationProcessor;
+import io.github.giovannicaggianella.toon.processor.ToonAnnotationProcessor;
 
 // In a Spring component
 @Autowired

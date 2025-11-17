@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.giovannicaggianella.toon.config.ToonAutoConfiguration
+io.github.giovannicaggianella.toon.config.ToonAutoConfiguration

@@ -1,6 +1,6 @@
-package com.giovannicaggianella.toon.config;
+package io.github.giovannicaggianella.toon.config;
 
-import com.giovannicaggianella.toon.processor.ToonAnnotationProcessor;
+import io.github.giovannicaggianella.toon.processor.ToonAnnotationProcessor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

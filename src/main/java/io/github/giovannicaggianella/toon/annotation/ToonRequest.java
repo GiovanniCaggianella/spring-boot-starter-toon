@@ -1,4 +1,4 @@
-package com.giovannicaggianella.toon.annotation;
+package io.github.giovannicaggianella.toon.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

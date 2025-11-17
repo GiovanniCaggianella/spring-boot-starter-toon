@@ -5,7 +5,7 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.giovannicaggianella</groupId>
+    <groupId>io.github.giovannicaggianella</groupId>
     <artifactId>spring-boot-starter-toon</artifactId>
     <version>0.1.0</version>
     <packaging>jar</packaging>

@@ -1,4 +1,4 @@
-package com.giovannicaggianella.toon.processor;
+package io.github.giovannicaggianella.toon.processor;
 
 import com.felipestanzani.jtoon.JToon;
 
