@@ -1,5 +1,8 @@
 package io.github.giovannicaggianella.toon.processor;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.felipestanzani.jtoon.Delimiter;
+import com.felipestanzani.jtoon.EncodeOptions;
 import com.felipestanzani.jtoon.JToon;
 
 /**
@@ -7,6 +10,8 @@ import com.felipestanzani.jtoon.JToon;
  * This class provides methods to encode and decode between Java objects and TOON format.
  */
 public class ToonAnnotationProcessor {
+
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     /**
      * Default constructor.
@@ -26,6 +31,21 @@ public class ToonAnnotationProcessor {
     }
 
     /**
+     * Encodes a Java object to TOON format with optional length markers.
+     *
+     * @param object the object to encode
+     * @param lengthMarker whether arrays should be prefixed with a length marker
+     * @return the TOON string representation of the object
+     */
+    public String encode(Object object, boolean lengthMarker) {
+        if (!lengthMarker) {
+            return encode(object);
+        }
+        EncodeOptions options = new EncodeOptions(2, Delimiter.COMMA, true);
+        return JToon.encode(object, options);
+    }
+
+    /**
      * Decodes a TOON string to a Java object of the specified class.
      *
      * @param <T> the type of the target object
@@ -35,8 +55,30 @@ public class ToonAnnotationProcessor {
      * @throws IllegalArgumentException if the TOON string is invalid or cannot be decoded to the target class
      */
     public <T> T decode(String toon, Class<T> clazz) {
-        //return JToon.decode(toon, clazz);
-        return null;
+        if (clazz == null) {
+            throw new IllegalArgumentException("Target class must not be null");
+        }
+        if (toon == null || toon.trim().isEmpty()) {
+            throw new IllegalArgumentException("TOON string must not be null or blank");
+        }
+
+        try {
+            Object decoded = JToon.decode(toon);
+            if (decoded == null) {
+                return null;
+            }
+
+            if (clazz.isInstance(decoded)) {
+                return clazz.cast(decoded);
+            }
+
+            return OBJECT_MAPPER.convertValue(decoded, clazz);
+        } catch (IllegalArgumentException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(
+                    "Failed to decode TOON payload into " + clazz.getSimpleName(), ex);
+        }
     }
 
     /**

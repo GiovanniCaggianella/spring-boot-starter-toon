@@ -1,11 +1,10 @@
 package io.github.giovannicaggianella.toon.config;
 
 import io.github.giovannicaggianella.toon.processor.ToonAnnotationProcessor;
+import io.github.giovannicaggianella.toon.processor.ToonResponseBodyAdvice;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Spring Boot auto-configuration for Toon.
@@ -13,8 +12,6 @@ import org.slf4j.LoggerFactory;
  */
 @Configuration
 public class ToonAutoConfiguration {
-
-    private static final Logger logger = LoggerFactory.getLogger(ToonAutoConfiguration.class);
 
     /**
      * Creates a bean for TOON annotation processing.
@@ -24,8 +21,19 @@ public class ToonAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public ToonAnnotationProcessor toonAnnotationProcessor() {
-        logger.info("Initializing ToonAnnotationProcessor");
         return new ToonAnnotationProcessor();
+    }
+
+    /**
+     * Registers the {@link ToonResponseBodyAdvice} bean to handle @ToonResponse annotations.
+     *
+     * @param processor the ToonAnnotationProcessor used for encoding
+     * @return the ToonResponseBodyAdvice bean
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public ToonResponseBodyAdvice toonResponseBodyAdvice(ToonAnnotationProcessor processor) {
+        return new ToonResponseBodyAdvice(processor);
     }
 
 }
